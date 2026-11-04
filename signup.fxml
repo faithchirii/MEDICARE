@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="12.0" alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.medicare.SignupController" prefWidth="350.0" prefHeight="380.0">
+    <padding><Insets top="20.0" right="30.0" bottom="20.0" left="30.0"/></padding>
+
+    <Label text="MedCare" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #0288D1;"/>
+    <Label text="Create a New Account" style="-fx-font-size: 11px; -fx-text-fill: gray;"/>
+
+    <VBox spacing="6.0" alignment="CENTER_LEFT" prefWidth="Infinity">
+        <Label text="Username:"/>
+        <TextField fx:id="usernameField" promptText="Choose a username"/>
+
+        <Label text="Password:"/>
+        <HBox spacing="5.0" alignment="CENTER">
+            <StackPane HBox.hgrow="ALWAYS">
+                <PasswordField fx:id="passwordField" promptText="Choose a password"/>
+                <TextField fx:id="visiblePasswordField" promptText="Choose a password" visible="false" managed="false"/>
+            </StackPane>
+
+            <Button fx:id="eyeButton" text="👁" onAction="#handleTogglePassword"
+                    style="-fx-base: #e0e0e0; -fx-cursor: hand;" prefWidth="35.0"/>
+
+            <Button text="Generate" onAction="#handleGeneratePassword"
+                    style="-fx-base: #FF9800; -fx-text-fill: white;"/>
+        </HBox>
+
+        <Label text="Role:"/>
+        <ComboBox fx:id="roleComboBox" maxWidth="Infinity" promptText="Select Role"/>
+    </VBox>
+
+    <Button text="Register" onAction="#handleRegister" maxWidth="Infinity"
+            style="-fx-base: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <Button text="Back to Login" onAction="#handleBackToLogin" maxWidth="Infinity"
+            style="-fx-base: #9e9e9e; -fx-text-fill: white;"/>
+
+    <Label fx:id="messageLabel" style="-fx-font-size: 11px;"/>
+</VBox>

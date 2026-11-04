@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="480.0" style="-fx-background-color: #f8f9fa;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.medicare.LoginController">
+    <children>
+        <!-- Top Window Control Bar -->
+        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" spacing="5.0" style="-fx-background-color: #343a40; -fx-padding: 0 10 0 0;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Medicare Portal" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleMinimize" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" text="—" />
+                <Button mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;" text="✕" />
+            </children>
+        </HBox>
+
+        <!-- Main Container -->
+        <VBox alignment="CENTER" layoutX="50.0" layoutY="45.0" spacing="12.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="45.0">
+            <children>
+                <!-- Header Logo & Title -->
+                <VBox alignment="CENTER" spacing="4.0">
+                    <children>
+                        <Label style="-fx-font-size: 36px;" text="🏥" />
+                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Medicare Hospital" />
+                        <Label fx:id="formTitleLabel" style="-fx-font-size: 13px; -fx-text-fill: #6c757d; -fx-font-weight: bold;" text="Please sign in to continue" />
+                    </children>
+                </VBox>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- Input Fields -->
+                <VBox prefWidth="380.0" spacing="10.0">
+                    <children>
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Username" />
+                        <TextField fx:id="usernameField" prefHeight="38.0" promptText="Enter username" />
+
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Password" />
+                        <HBox spacing="5.0">
+                            <children>
+                                <StackPane HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <PasswordField fx:id="passwordField" prefHeight="38.0" promptText="Enter password" />
+                                        <TextField fx:id="passwordTextField" prefHeight="38.0" promptText="Enter password" visible="false" />
+                                    </children>
+                                </StackPane>
+                                <Button fx:id="togglePasswordBtn" mnemonicParsing="false" onAction="#handleTogglePassword" prefHeight="38.0" prefWidth="45.0" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="👁" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <VBox prefWidth="380.0" spacing="8.0">
+                    <children>
+                        <Button fx:id="loginButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="Sign In" />
+                        <Button fx:id="registerModeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleToggleRegisterMode" prefHeight="36.0" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;" text="Create New Account" />
+                    </children>
+                </VBox>
+
+                <Hyperlink fx:id="toggleModeLink" onAction="#handleToggleRegisterMode" style="-fx-text-fill: #0078d7; -fx-font-size: 12px;" text="Need help? Click here to register." />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

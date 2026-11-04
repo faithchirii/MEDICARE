@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.medicare.DashboardController">
+
+    <!-- Top Window Control Bar -->
+    <top>
+        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" spacing="5.0" style="-fx-background-color: #212529; -fx-padding: 0 10 0 0;">
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="🏥 Medicare Hospital Management System" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" onAction="#handleMinimize" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;" text="—" />
+                <Button mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;" text="✕" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Left Sidebar Navigation matching exact user specifications -->
+    <left>
+        <VBox prefWidth="210.0" spacing="6.0" style="-fx-background-color: #343a40; -fx-padding: 15;">
+            <children>
+                <Label style="-fx-text-fill: #adb5bd; -fx-font-size: 11px; -fx-font-weight: bold;" text="NAVIGATION MENU" />
+
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showDashboardView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="🏠 Dashboard" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showPatientsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="👥 Patients" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showDoctorsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="👨‍⚕️ Doctors" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAppointmentsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="📅 Appointments" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMedicalRecordsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="📋 Medical Records" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showBillingView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="💳 Billing" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showPharmacyView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="💊 Pharmacy" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showReportsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="📈 Reports" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showSettingsView" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="⚙️ Settings" />
+
+                <Region VBox.vgrow="ALWAYS" />
+                <Separator />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;" text="🔒 Logout" />
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Center Content StackPane (Houses all 9 views) -->
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #f8f9fa;">
+
+            <!-- 1. Dashboard Home Overview Pane -->
+            <AnchorPane fx:id="dashboardHomePane">
+                <children>
+                    <VBox layoutX="30.0" layoutY="30.0" spacing="15.0">
+                        <children>
+                            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Welcome to Medicare Hospital System" />
+                            <Label style="-fx-font-size: 14px; -fx-text-fill: #666;" text="Select an option from the sidebar to manage hospital operations." />
+                            <Separator prefWidth="500.0" />
+                            <HBox spacing="20.0">
+                                <children>
+                                    <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ddd; -fx-border-radius: 5;" prefWidth="200.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-text-fill: #888;" text="Total Patients" />
+                                            <Label fx:id="lblStatPatients" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="0" />
+                                        </children>
+                                    </VBox>
+                                    <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ddd; -fx-border-radius: 5;" prefWidth="200.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-text-fill: #888;" text="Scheduled Appointments" />
+                                            <Label fx:id="lblStatAppointments" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #28a745;" text="0" />
+                                        </children>
+                                    </VBox>
+                                    <VBox style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ddd; -fx-border-radius: 5;" prefWidth="200.0">
+                                        <children>
+                                            <Label style="-fx-font-size: 14px; -fx-text-fill: #888;" text="Registered Doctors" />
+                                            <Label fx:id="lblStatDoctors" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #17a2b8;" text="0" />
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 2. Patients Pane -->
+            <AnchorPane fx:id="patientsPane" visible="false">
+                <children>
+                    <TextField fx:id="searchField" layoutX="14.0" layoutY="14.0" prefWidth="540.0" promptText="🔍 Search patients..." />
+                    <TableView fx:id="patientTable" layoutX="14.0" layoutY="55.0" prefHeight="600.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="55.0">
+                        <columns>
+                            <TableColumn fx:id="colPatientId" prefWidth="35.0" text="ID" />
+                            <TableColumn fx:id="colPatientName" prefWidth="105.0" text="Name" />
+                            <TableColumn fx:id="colPatientDob" prefWidth="80.0" text="DOB" />
+                            <TableColumn fx:id="colPatientGender" prefWidth="55.0" text="Gender" />
+                            <TableColumn fx:id="colPatientDisease" prefWidth="100.0" text="Disease" />
+                            <TableColumn fx:id="colPatientContact" prefWidth="80.0" text="Phone" />
+                            <TableColumn fx:id="colPatientAddress" prefWidth="84.0" text="Address" />
+                        </columns>
+                    </TableView>
+                    <VBox layoutX="570.0" layoutY="14.0" spacing="10.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <children>
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Patient Registration" />
+                            <TextField fx:id="nameField" promptText="Full Name" />
+                            <TextField fx:id="dobField" promptText="Date of Birth (YYYY-MM-DD)" />
+                            <TextField fx:id="genderField" promptText="Gender" />
+                            <TextField fx:id="diseaseField" promptText="Disease / Condition" />
+                            <TextField fx:id="contactField" promptText="Phone Number" />
+                            <TextField fx:id="addressField" promptText="Address" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddPatient" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" text="Save Patient" />
+                            <Separator />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleExportPatientsCSV" style="-fx-background-color: #17a2b8; -fx-text-fill: white;" text="Export CSV" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeletePatient" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Delete Patient" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 3. Doctors Pane -->
+            <AnchorPane fx:id="doctorsPane" visible="false">
+                <children>
+                    <TableView fx:id="doctorTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <columns>
+                            <TableColumn fx:id="colDoctorId" prefWidth="45.0" text="ID" />
+                            <TableColumn fx:id="colDoctorName" prefWidth="150.0" text="Doctor Name" />
+                            <TableColumn fx:id="colDoctorSpecialization" prefWidth="180.0" text="Specialization" />
+                            <TableColumn fx:id="colDoctorContact" prefWidth="164.0" text="Contact" />
+                        </columns>
+                    </TableView>
+                    <VBox layoutX="570.0" layoutY="14.0" spacing="10.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <children>
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Doctor Registration" />
+                            <TextField fx:id="docNameField" promptText="Doctor Name" />
+                            <TextField fx:id="docSpecializationField" promptText="Specialization (e.g. Cardiology)" />
+                            <TextField fx:id="docContactField" promptText="Contact Number" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddDoctor" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Register Doctor" />
+                            <Separator />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeleteDoctor" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Delete Doctor" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 4. Appointments Pane -->
+            <AnchorPane fx:id="appointmentsPane" visible="false">
+                <children>
+                    <HBox layoutX="14.0" layoutY="14.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <children>
+                            <TextField fx:id="apptSearchField" prefWidth="360.0" promptText="🔍 Search appointments..." />
+                            <ComboBox fx:id="apptStatusFilter" prefWidth="160.0" promptText="Filter Status" />
+                        </children>
+                    </HBox>
+                    <TableView fx:id="appointmentTable" layoutX="14.0" layoutY="55.0" prefHeight="600.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="55.0">
+                        <columns>
+                            <TableColumn fx:id="colApptId" prefWidth="35.0" text="ID" />
+                            <TableColumn fx:id="colApptPatient" prefWidth="100.0" text="Patient" />
+                            <TableColumn fx:id="colApptDoctor" prefWidth="100.0" text="Doctor" />
+                            <TableColumn fx:id="colApptDate" prefWidth="85.0" text="Date" />
+                            <TableColumn fx:id="colApptTime" prefWidth="65.0" text="Time" />
+                            <TableColumn fx:id="colApptReason" prefWidth="95.0" text="Reason" />
+                            <TableColumn fx:id="colApptStatus" prefWidth="59.0" text="Status" />
+                        </columns>
+                    </TableView>
+                    <VBox layoutX="570.0" layoutY="55.0" spacing="10.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="55.0">
+                        <children>
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Schedule Appointment" />
+                            <TextField fx:id="apptPatientField" promptText="Patient Name" />
+                            <TextField fx:id="apptDoctorField" promptText="Doctor Name" />
+                            <TextField fx:id="apptDateField" promptText="Date (YYYY-MM-DD)" />
+                            <TextField fx:id="apptTimeField" promptText="Time (HH:MM)" />
+                            <TextField fx:id="apptReasonField" promptText="Reason for visit" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBookAppointment" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Book Appointment" />
+                            <Separator />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMarkAppointmentCompleted" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" text="Mark Completed" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeleteAppointment" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Cancel Appointment" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 5. Medical Records Pane -->
+            <AnchorPane fx:id="medicalRecordsPane" visible="false">
+                <children>
+                    <VBox layoutX="20.0" layoutY="20.0" spacing="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <children>
+                            <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Patient Medical Records" />
+                            <Label text="Select a patient from the Patients tab or enter patient name to manage records." />
+                            <HBox spacing="10.0">
+                                <children>
+                                    <TextField fx:id="medRecordPatientField" prefWidth="300.0" promptText="Patient Full Name" />
+                                    <Button mnemonicParsing="false" onAction="#handleOpenMedicalHistory" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Open Records &amp; Notes" />
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 6. Billing Pane -->
+            <AnchorPane fx:id="billingPane" visible="false">
+                <children>
+                    <TableView fx:id="billTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <columns>
+                            <TableColumn fx:id="colBillId" prefWidth="40.0" text="ID" />
+                            <TableColumn fx:id="colBillPatient" prefWidth="130.0" text="Patient Name" />
+                            <TableColumn fx:id="colBillTotal" prefWidth="95.0" text="Total (KSh)" />
+                            <TableColumn fx:id="colBillPaid" prefWidth="95.0" text="Paid (KSh)" />
+                            <TableColumn fx:id="colBillBalance" prefWidth="95.0" text="Balance" />
+                            <TableColumn fx:id="colBillStatus" prefWidth="84.0" text="Status" />
+                        </columns>
+                    </TableView>
+                    <VBox layoutX="570.0" layoutY="14.0" spacing="10.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <children>
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Billing &amp; Payments" />
+                            <TextField fx:id="billPatientField" promptText="Patient Name" />
+                            <TextField fx:id="billTotalField" promptText="Total Amount (KSh)" />
+                            <TextField fx:id="billPaidField" promptText="Amount Paid (KSh)" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleGenerateBill" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Bill" />
+                            <Separator />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleMarkBillPaid" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" text="Mark Paid" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlePrintReceipt" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-weight: bold;" text="Print Receipt" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 7. Pharmacy Pane -->
+            <AnchorPane fx:id="pharmacyPane" visible="false">
+                <children>
+                    <TableView fx:id="medicineTable" layoutX="14.0" layoutY="14.0" prefHeight="600.0" prefWidth="540.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <columns>
+                            <TableColumn fx:id="colMedId" prefWidth="45.0" text="ID" />
+                            <TableColumn fx:id="colMedName" prefWidth="160.0" text="Medicine Name" />
+                            <TableColumn fx:id="colMedQty" prefWidth="95.0" text="Quantity" />
+                            <TableColumn fx:id="colMedPrice" prefWidth="95.0" text="Price (KSh)" />
+                            <TableColumn fx:id="colMedExpiry" prefWidth="144.0" text="Expiry Date" />
+                        </columns>
+                    </TableView>
+                    <VBox layoutX="570.0" layoutY="14.0" spacing="10.0" AnchorPane.leftAnchor="570.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <children>
+                            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Pharmacy Inventory" />
+                            <TextField fx:id="medNameField" promptText="Medicine Name" />
+                            <TextField fx:id="medQtyField" promptText="Quantity" />
+                            <TextField fx:id="medPriceField" promptText="Unit Price (KSh)" />
+                            <TextField fx:id="medExpiryField" promptText="Expiry Date (YYYY-MM-DD)" />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleAddMedicine" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Add Medicine" />
+                            <Separator />
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDeleteMedicine" style="-fx-background-color: #dc3545; -fx-text-fill: white;" text="Delete Medicine" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 8. Reports Pane -->
+            <AnchorPane fx:id="reportsPane" visible="false">
+                <children>
+                    <VBox layoutX="30.0" layoutY="30.0" spacing="20.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                        <children>
+                            <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="Hospital Analytics &amp; Reports" />
+                            <PieChart fx:id="genderPieChart" prefHeight="380.0" prefWidth="500.0" title="Patient Gender Distribution" />
+                            <Button mnemonicParsing="false" onAction="#loadAnalytics" style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-font-weight: bold;" text="Refresh Reports" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+            <!-- 9. Settings Pane -->
+            <AnchorPane fx:id="settingsPane" visible="false">
+                <children>
+                    <VBox layoutX="30.0" layoutY="30.0" spacing="15.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                        <children>
+                            <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0078d7;" text="System Settings" />
+                            <Label text="Database: SQLite (medicare.db)" />
+                            <Label text="Application Version: 1.0.0 Professional" />
+                            <Separator prefWidth="400.0" />
+                            <Button mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #343a40; -fx-text-fill: white; -fx-font-weight: bold;" text="Logout from Session" />
+                        </children>
+                    </VBox>
+                </children>
+            </AnchorPane>
+
+        </StackPane>
+    </center>
+</BorderPane>
